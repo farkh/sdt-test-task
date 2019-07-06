@@ -1,0 +1,34 @@
+.table {
+    .priority {
+        position: relative;
+
+        &::before {
+            content: '';
+            display: block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            position: absolute;
+            left: 5px;
+            top: calc(50% - 7px);
+        }
+
+        // &--low {
+        //     &::before {
+        //         background-color: lightgreen;
+        //     }
+        // }
+        
+        &--medium {
+            &::before {
+                background-color: orange;
+            }
+        }
+        
+        &--high {
+            &::before {
+                background-color: red;
+            }
+        }
+    }
+}
