@@ -11,6 +11,7 @@ import store from './store';
 
 import Workspace from './components/Workspace/Workspace';
 import RequestsPage from './pages/Requests/RequestsPage';
+import CreateRequestPage from './pages/CreateRequest/CreateRequestPage';
 
 store.subscribe(() => {
     localStorage.setItem('SDTReduxState', JSON.stringify(store.getState()));
@@ -23,7 +24,7 @@ const App = () => {
                 <Workspace>
                     <Switch>
                         <Route exact path="/requests" component={RequestsPage} />
-                        <Route exact path="/new" render={() => <h1>Add new request</h1>} />
+                        <Route exact path="/new" component={CreateRequestPage} />
 
                         <Redirect to="/requests" />
                     </Switch>
