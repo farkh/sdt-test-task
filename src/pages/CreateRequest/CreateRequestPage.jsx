@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 
 import { addRequest } from '../../redux/actions/requestActions';
 import './_create-request-page.scss';
@@ -9,6 +9,12 @@ import './_create-request-page.scss';
 class CreateRequestPage extends Component {
     static propTypes = {
         addRequest: PropTypes.func.isRequired,
+        projectsState: PropTypes.shape({
+            projects: PropTypes.arrayOf(PropTypes.shape({
+                title: PropTypes.string,
+                value: PropTypes.string,
+            })),
+        }).isRequired,
     };
     
     state = {
@@ -36,8 +42,10 @@ class CreateRequestPage extends Component {
     };
     
     render() {
+        const { projectsState } = this.props;
         const { title, text, project, priority } = this.state;
         const isSubmitActive = title.length > 0 && text.length > 0 && project.length > 0;
+        const { projects } = projectsState;
         
         return (
             <div className="create-page">
@@ -71,14 +79,15 @@ class CreateRequestPage extends Component {
                     <select
                         name="project"
                         id="project"
-                        className="mb-2"
                         onChange={this._handleInputChange}
                         value={project}
                     >
                         <option value="">Project</option>
-                        <option value="test">Test</option>
-                        <option value="second_project">Second Project</option>
+                        {projects && projects.length > 0 && projects.map(project => (
+                            <option key={project.value} value={project.value}>{project.title}</option>
+                        ))}
                     </select>
+                    <NavLink to="/projects/new" className="link mb-2">Create project</NavLink>
 
                     <select
                         name="priority"
@@ -105,4 +114,8 @@ class CreateRequestPage extends Component {
     }
 }
 
-export default withRouter(connect(null, { addRequest })(CreateRequestPage));
+const mapStateToProps = state => ({
+    projectsState: state.projectsReducer,
+});
+
+export default withRouter(connect(mapStateToProps, { addRequest })(CreateRequestPage));

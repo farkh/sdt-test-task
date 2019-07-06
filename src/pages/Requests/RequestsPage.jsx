@@ -18,11 +18,18 @@ class RequestsPage extends Component {
                 date: PropTypes.string,
             })),
         }).isRequired,
+        projectsState: PropTypes.shape({
+            projects: PropTypes.arrayOf(PropTypes.shape({
+                title: PropTypes.string,
+                value: PropTypes.string,
+            })),
+        }).isRequired,
     };
     
     render() {
-        const { requestsState } = this.props;
+        const { requestsState, projectsState } = this.props;
         const { requests } = requestsState;
+        const { projects } = projectsState;
         
         return (
             <div className="requests">
@@ -36,11 +43,12 @@ class RequestsPage extends Component {
                             className="select"
                         >
                             <option value="">All projects</option>
-                            <option value="test">Test project</option>
-                            <option value="second_project">Second Project</option>
+                            {projects && projects.length > 0 && projects.map(project => (
+                                <option key={project.value} value={project.value}>{project.title}</option>
+                            ))}
                         </select>
                         
-                        <NavLink to="/new" className="btn btn--primary ml-1">Add request</NavLink>
+                        <NavLink to="/requests/new" className="btn btn--primary ml-1">Add request</NavLink>
                     </div>
                 </div>
 
@@ -54,6 +62,7 @@ class RequestsPage extends Component {
 
 const mapStateToProps = state => ({
     requestsState: state.requestsReducer,
+    projectsState: state.projectsReducer,
 });
 
 export default connect(mapStateToProps)(RequestsPage);
