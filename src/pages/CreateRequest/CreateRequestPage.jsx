@@ -28,6 +28,8 @@ class CreateRequestPage extends Component {
         if (e) e.preventDefault();
         const { title, text, project, priority } = this.state;
         const date = new Date().toLocaleDateString();
+
+        if (title.length === 0 || text.length === 0) return;
         
         this.props.addRequest({ title, text, project, priority, date });
         this.props.history.push('/requests');
