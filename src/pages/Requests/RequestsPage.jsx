@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
@@ -7,7 +8,22 @@ import CustomTable from '../../components/CustomTable/CustomTable';
 import './_requests-page.scss';
 
 class RequestsPage extends Component {
+    static propTypes = {
+        requestsState: PropTypes.shape({
+            requests: PropTypes.arrayOf(PropTypes.shape({
+                title: PropTypes.string,
+                text: PropTypes.string,
+                project: PropTypes.string,
+                priority: PropTypes.number,
+                date: PropTypes.string,
+            })),
+        }).isRequired,
+    };
+    
     render() {
+        const { requestsState } = this.props;
+        const { requests } = requestsState;
+        
         return (
             <div className="requests">
                 <div className="requests__header">
@@ -29,11 +45,15 @@ class RequestsPage extends Component {
                 </div>
 
                 <CustomTable
-                    data={[]}
+                    data={requests}
                 />
             </div>
         );
     }
 }
 
-export default RequestsPage;
+const mapStateToProps = state => ({
+    requestsState: state.requestsReducer,
+});
+
+export default connect(mapStateToProps)(RequestsPage);
