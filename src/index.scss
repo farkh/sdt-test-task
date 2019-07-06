@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,500&display=swap');
+$base-size: 8px;
+
+html {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+@for $i from 0 through 5 {
+	.m-#{$i} {
+		margin: $base-size * $i;
+	}
+
+	.mt-#{$i} {
+		margin-top: $base-size * $i;
+	}
+
+	.mb-#{$i} {
+		margin-bottom: $base-size * $i;
+	}
+
+	.mr-#{$i} {
+		margin-right: $base-size * $i;
+	}
+
+	.ml-#{$i} {
+		margin-left: $base-size * $i;
+	}
+}
+
+@for $i from 0 through 5 {
+	.p-#{$i} {
+		padding: $base-size * $i;
+	}
+
+	.pt-#{$i} {
+		padding-top: $base-size * $i;
+	}
+
+	.pb-#{$i} {
+		padding-bottom: $base-size * $i;
+	}
+
+	.pr-#{$i} {
+		padding-right: $base-size * $i;
+	}
+
+	.pl-#{$i} {
+		padding-left: $base-size * $i;
+	}
+}
+
+.link {
+	font-style: italic;
+}
+
+.btn {
+	padding: 10px 20px;
+	border-radius: 3px;
+	cursor: pointer;
+	text-decoration: none;
+
+	&--primary {
+		background-color: #2d2950;
+		color: #ffffff;
+
+		&:hover {
+			background-color: #100733;
+		}
+	}
+
+	&:disabled {
+		opacity: 0.8;
+		cursor: default;
+		pointer-events: none;
+	}
+}
