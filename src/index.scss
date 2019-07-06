@@ -48,3 +48,25 @@ html {
 		padding-left: $base-size * $i;
 	}
 }
+
+.btn {
+	padding: 10px 20px;
+	border-radius: 3px;
+	cursor: pointer;
+	text-decoration: none;
+
+	&--primary {
+		background-color: #2d2950;
+		color: #ffffff;
+
+		&:hover {
+			background-color: #100733;
+		}
+	}
+
+	&:disabled {
+		opacity: 0.8;
+		cursor: default;
+		pointer-events: none;
+	}
+}
