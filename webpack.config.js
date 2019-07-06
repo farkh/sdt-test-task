@@ -17,10 +17,13 @@ module.exports = {
                 },
             },
             {
-                test: /\.scss$/,
+                test: /\.?css$/,
                 use: ['style-loader', 'css-loader', 'sass-loader'],
             },
         ],
+    },
+    devServer: {
+        historyApiFallback: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
