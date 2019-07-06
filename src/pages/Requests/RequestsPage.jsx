@@ -25,10 +25,54 @@ class RequestsPage extends Component {
             })),
         }).isRequired,
     };
+
+    state = {
+        selectedProject: '',
+        requests: [],
+    };
+
+    componentDidMount() {
+        const { requestsState } = this.props;
+        const { requests } = requestsState;
+
+        this.setState({ requests });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { requestsState } = nextProps;
+        const { requests } = requestsState;
+
+        this.setState({ requests });
+    }
+
+    _handleSelectChange = (e) => {
+        const { value } = e.target;
+        
+        this.setState({ selectedProject: value }, () => {
+            this._filterByProject();
+        });
+    };
+    
+    _filterByProject = () => {
+        const { projectsState, requestsState } = this.props;
+        const { selectedProject } = this.state;
+        const { projects } = projectsState;
+        const { requests } = requestsState;
+        
+        if (selectedProject === '') {
+            this.setState({ requests });
+            return;
+        }
+
+        const selectedProjectTitle = projects.filter(item => item.value === selectedProject)[0].title;
+        const filteredRequests = requests.filter(item => item.project === selectedProjectTitle);
+
+        this.setState({ requests: filteredRequests });
+    };
     
     render() {
-        const { requestsState, projectsState } = this.props;
-        const { requests } = requestsState;
+        const { projectsState } = this.props;
+        const { selectedProject, requests } = this.state;
         const { projects } = projectsState;
         
         return (
@@ -38,9 +82,11 @@ class RequestsPage extends Component {
 
                     <div className="requests__buttons">
                         <select
-                            name="project"
+                            name="selectedProject"
                             id="project"
                             className="select"
+                            value={selectedProject}
+                            onChange={this._handleSelectChange}
                         >
                             <option value="">All projects</option>
                             {projects && projects.length > 0 && projects.map(project => (
