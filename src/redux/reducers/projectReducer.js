@@ -1,7 +1,16 @@
 import { ADD_PROJECT } from '../types/projectTypes';
 
 const initialState = {
-    projects: [],
+    projects: [
+        {
+            title: 'TestProject',
+            value: 'testproject',
+        },
+        {
+            title: 'SDT Test',
+            value: 'sdt_test',
+        },
+    ],
 };
 
 export default (state = initialState, action) => {
