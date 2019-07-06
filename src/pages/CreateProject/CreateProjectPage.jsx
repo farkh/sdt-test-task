@@ -5,7 +5,7 @@ import { withRouter, NavLink } from 'react-router-dom';
 
 import { addProject } from '../../redux/actions/projectActions';
 
-class CreateRequestPage extends Component {
+class CreateProjectPage extends Component {
     static propTypes = {
         addProject: PropTypes.func.isRequired,
     };
@@ -71,4 +71,4 @@ class CreateRequestPage extends Component {
     }
 }
 
-export default withRouter(connect(null, { addProject })(CreateRequestPage));
+export default withRouter(connect(null, { addProject })(CreateProjectPage));

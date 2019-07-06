@@ -37,7 +37,7 @@ class CreateRequestPage extends Component {
 
         if (title.length === 0 || text.length === 0 || project.length === 0) return;
         
-        this.props.addRequest({ title, text, project, priority, date });
+        this.props.addRequest({ title, text, project, priority: +priority, date });
         this.props.history.push('/requests');
     };
     
