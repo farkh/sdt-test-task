@@ -6,9 +6,9 @@ import {
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import store from '../store';
+import store from './store';
 
-import Workspace from './Workspace/Workspace';
+import Workspace from './components/Workspace/Workspace';
 
 store.subscribe(() => {
     localStorage.setItem('SDTReduxState', JSON.stringify(store.getState()));
