@@ -1,0 +1,15 @@
+.requests {
+    padding: 20px;
+
+    &__header {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    &__buttons {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+    }
+}
