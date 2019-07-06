@@ -1,0 +1,35 @@
+.workspace {
+    width: 100vw;
+    min-height: 100vh;
+    background: #fcfbfc;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    &__title {
+        margin: 0;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        width: 500px;
+    }
+
+    &__textarea,
+    &__input {
+        border: none;
+        border-radius: 3px;
+        box-sizing: border-box;
+        padding: 8px;
+        outline: none;
+
+        &:focus {
+            box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.75);
+        }
+    }
+
+    &__input {
+        height: 36px;
+    }
+}
