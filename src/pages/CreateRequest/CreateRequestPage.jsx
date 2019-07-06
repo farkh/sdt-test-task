@@ -32,8 +32,13 @@ class CreateRequestPage extends Component {
 
     _handleSubmit = (e) => {
         if (e) e.preventDefault();
-        const { title, text, project, priority } = this.state;
+        const { projectsState } = this.props;
+        const { title, text, priority } = this.state;
+        let { project } = this.state;
+        const { projects: projectsList } = projectsState;
         const date = new Date().toLocaleDateString();
+        
+        project = projectsList.filter(item => item.value === project)[0].title;
 
         if (title.length === 0 || text.length === 0 || project.length === 0) return;
         
