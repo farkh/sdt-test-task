@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
+import './_custom-table.scss';
+
 class CustomTable extends Component {
     static propTypes = {
         data: PropTypes.arrayOf(PropTypes.shape({
@@ -20,6 +22,19 @@ class CustomTable extends Component {
     
     _sort = (a, b) => {
         return a.localeCompare(b);
+    };
+
+    _getPriorityLabelByCode = (code) => {
+        switch (code) {
+            case 0:
+                return 'Low';
+            case 1:
+                return 'Medium';
+            case 2:
+                return 'High';
+            default:
+                return 'Low';
+        }
     };
     
     render() {
@@ -43,6 +58,11 @@ class CustomTable extends Component {
             {
                 Header: 'Priority',
                 accessor: 'priority',
+                Cell: props => (
+                    <div className={`priority priority--${this._getPriorityLabelByCode(props.original.priority).toLowerCase()} pl-3`}>
+                        {this._getPriorityLabelByCode(props.original.priority)}
+                    </div>
+                ),
             },
             {
                 Header: 'Date',
