@@ -29,7 +29,7 @@ class CreateRequestPage extends Component {
         const { title, text, project, priority } = this.state;
         const date = new Date().toLocaleDateString();
 
-        if (title.length === 0 || text.length === 0) return;
+        if (title.length === 0 || text.length === 0 || project.length === 0) return;
         
         this.props.addRequest({ title, text, project, priority, date });
         this.props.history.push('/requests');
@@ -37,7 +37,7 @@ class CreateRequestPage extends Component {
     
     render() {
         const { title, text, project, priority } = this.state;
-        const isSubmitActive = title.length > 0 && text.length > 0;
+        const isSubmitActive = title.length > 0 && text.length > 0 && project.length > 0;
         
         return (
             <div className="create-page">
@@ -75,6 +75,7 @@ class CreateRequestPage extends Component {
                         onChange={this._handleInputChange}
                         value={project}
                     >
+                        <option value="">Project</option>
                         <option value="test">Test</option>
                         <option value="second_project">Second Project</option>
                     </select>

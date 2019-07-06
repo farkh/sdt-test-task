@@ -19,9 +19,7 @@ class CustomTable extends Component {
     };
     
     _sort = (a, b) => {
-        if (a.length === b.length) return a > b ? 1 : -1;
-
-        return a.length > b.length ? 1 : -1;
+        return a.localeCompare(b);
     };
     
     render() {
